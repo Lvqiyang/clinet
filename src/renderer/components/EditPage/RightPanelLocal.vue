@@ -5,7 +5,7 @@
         <th class="table-danger"> {{title}}</th>
       </tr>
       <tr v-for="(data, index) in xs" v-bind:key='index' v-on:click="loadFile(data, index)" v-bind:class="{'table-danger':flag == index}">
-        <td>{{data}}</td>
+        <td id="edit-right-panel">{{data}}</td>
       </tr>
     </table>
   </div>

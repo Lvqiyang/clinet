@@ -2,8 +2,8 @@
   <div>
     <right-bar></right-bar>
     <table>
-      <tr v-for="(data, index) in xs" v-bind:key='index' v-on:click="onClick(data, index)" v-bind:class="{'table-danger':flag == index}" id="library-rightpanel">
-        <td v-for="(field, index) in data" v-bind:key='index'>{{data[index]}}</td>
+      <tr v-for="(data, index) in xs" v-bind:key='index' v-on:click="onClick(data, index)" v-bind:class="{'table-danger':flag == index}">
+        <td id="library-rightpanel" v-for="(field, index) in data" v-bind:key='index'>{{data[index]}}</td>
       </tr>
     </table>
   </div>
