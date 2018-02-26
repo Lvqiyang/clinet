@@ -14,15 +14,45 @@ const state = {
   fieldIndex: null,
   server: '',
   port: '',
+  peers: [],
+  funs: [],
+  account: null,
+  myTrans: [],
+  myTransUn: [],
+  trans: [],
+  transUn: []
 };
 
 const mutations = {
   BLOCK_SET_TOOLBAR(state, toolbar) {
     state.toolbar = toolbar;
   },
+  BLOCK_SET_PEERS(state, peers) {
+    state.peers = peers;
+  },
+  BLOCK_SET_FUNS(state, funs) {
+    state.funs = funs;
+  },
   BLOCK_SET_SERVER(state, m) {
-    state.server = m[1];
-    state.port = m[2];
+    // console.log(m)
+    state.server = m[0];
+    state.port = m[1];
+  },
+  BLOCK_SET_ACCOUNT(state, account) {
+    state.account = account;
+  },
+  BLOCK_SET_MYTRANS(state, myTrans) {
+    state.myTrans = myTrans;
+  },
+  BLOCK_SET_MYTRANSUN(state, myTransUn) {
+    state.myTransUn = myTransUn;
+  },
+  BLOCK_SET_TRANS(state, trans) {
+    console.log(trans)
+    state.trans = trans;
+  },
+  BLOCK_SET_TRANSUN(state, transUn) {
+    state.transUn = transUn;
   },
   BLOCK_SET_SERVER_STATUS(state, m) {
     const a = state.file[m[0]]
@@ -72,6 +102,13 @@ const actions = {
     commit('BLOCK_SET_TABLE');
     commit('BLOCK_SET_SERVER');
     commit('BLOCK_SET_SERVER_STATUS');
+    commit('BLOCK_SET_PEERS');
+    commit('BLOCK_SET_FUNS');
+    commit('BLOCK_SET_ACCOUNT');
+    commit('BLOCK_SET_TRANS');
+    commit('BLOCK_SET_TRANSUN');
+    commit('BLOCK_SET_MYTRANS');
+    commit('BLOCK_SET_MYTRANSUN');
   },
 };
 
