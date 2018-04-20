@@ -5,7 +5,7 @@ describe('Stat', function () {
   afterEach(utils.afterEach);
 
   it('Stat-测试1', function () {
-    this.timeout(60000)
+    this.timeout(80000)
     // 1、点击login页面的login-button
     return this.app.client.click('#login')
     // 等待底部通知框出现'未注册用户登陆！'提示，进入Home页
@@ -169,7 +169,7 @@ describe('Stat', function () {
       .getText('.stat-left-dimension-tr')
       .then(function (org) {
         // console.log(org)
-        expect(org).to.be.an('string');
+        expect(org).to.be.an('array');
       })
       .click('.stat-left-dimension-tr')
       // .waitUntilWindowLoaded(1000)
@@ -181,7 +181,6 @@ describe('Stat', function () {
     // 2.1.1.1.9.2 点击时间 leftPanel显示可选时间维度
       .click('#stat-right-dimension')
       .click('#stat-right-dimension-time')
-      // .waitUntilWindowLoaded(1000)
       .getText('.stat-left-dimension-tr')
       .then(function (time) {
         expect(time).to.be.an('array');
@@ -193,16 +192,14 @@ describe('Stat', function () {
         expect(time).to.be.an('array');
       })
     // 2.1.1.1.9.3 点击病种 leftPanel显示可选病种维度
-      // .click('#stat-right-dimension')
-      // .click('#stat-right-dimension-disease')
-      // .waitUntilWindowLoaded(1000)
-      // .getText('.stat-left-dimension-tr')
-      // .then(function (disease) {
-      //   // console.log(disease);
-      //   expect(disease).to.be.an('array');
-      // })
+      .click('#stat-right-dimension')
+      .click('#stat-right-dimension-disease')
+      .getText('.stat-left-dimension-tr')
+      .then(function (disease) {
+        // console.log(disease);
+        expect(disease).to.be.an('array');
+      })
       // .click('.stat-left-dimension-tr')
-      // .waitUntilWindowLoaded(1000)
       // .getText('.stat-right-table-tr')
       // .then(function (disease) {
       //   expect(disease).to.be.an('array');
@@ -215,7 +212,7 @@ describe('Stat', function () {
       .waitUntilTextExists('#notice-bar', '未登录用户,请在系统服务-用户设置内登录')
       .click('#navbar-system')
       .click('#navbar-system-server')
-      .waitUntilTextExists('#notice-bar', '系统服务-远程服务器设置')
+      // .waitUntilTextExists('#notice-bar', '系统服务-远程服务器设置')
       .click('#server-user-setup')
       .click('#server-login')
       .click('#navbar-stat')
