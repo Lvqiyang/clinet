@@ -1,5 +1,11 @@
 const axios = require('axios');
 const qs = require('qs');
+const ChartScatter = require('./ChartScatter');
+const ChartRadar = require('./ChartRadar');
+const ChartBar = require('./ChartBar');
+const ChartLine = require('./ChartLine');
+const ChartPie = require('./ChartPie');
+const ChartData = require('./ChartData');
 export function getStatFiles(obj, data, filename, username) {
   let url = ''
   if (filename !== '') {
@@ -115,6 +121,43 @@ export function getStat(obj, data, opt, tableType) {
       if (tableType === 'edit') {
         obj.$store.commit('EDIT_LOAD_FILE', res.data.stat.filter(x => x !== undefined).map(x => x.join(',')))
       }
+      ChartData.default(obj, res.data.stat, obj.$store.state.Stat.selectedRow, obj.$store.state.Stat.selectedCol)
+      switch (obj.$store.state.Stat.chartLeft) {
+        case '柱状图':
+          ChartBar.default('chartLeft', obj.$store.state.Stat.chartData)
+          break;
+        case '折线图':
+          ChartLine.default('chartLeft', obj.$store.state.Stat.chartData)
+          break;
+        case '雷达图':
+          ChartRadar.default('chartLeft', obj.$store.state.Stat.chartData)
+          break;
+        case '散点图':
+          ChartScatter.default('chartLeft', obj.$store.state.Stat.chartData)
+          break;
+        case '饼图':
+          ChartPie.default('chartLeft', obj.$store.state.Stat.chartData)
+          break;
+        default: break;
+      }
+      switch (obj.$store.state.Stat.chartRight) {
+        case '柱状图':
+          ChartBar.default('chartRight', obj.$store.state.Stat.chartData)
+          break;
+        case '折线图':
+          ChartLine.default('chartRight', obj.$store.state.Stat.chartData)
+          break;
+        case '雷达图':
+          ChartRadar.default('chartRight', obj.$store.state.Stat.chartData)
+          break;
+        case '散点图':
+          ChartScatter.default('chartRight', obj.$store.state.Stat.chartData)
+          break;
+        case '饼图':
+          ChartPie.default('chartRight', obj.$store.state.Stat.chartData)
+          break;
+        default: break;
+      }
     }
   }).catch((err) => {
     console.log(err);
@@ -159,6 +202,6 @@ export function getStatWt4(obj, data, org, time, drg) {
     obj.$store.commit('STAT_SET_TABLE_TYPE', 'case')
   }).catch((err) => {
     console.log(err)
-    obj.$store.commit('SET_NOTICE', '查询病案失败!');
+    obj.$store.commit('SET_NOTICE', '保存对比失败!');
   })
 }
